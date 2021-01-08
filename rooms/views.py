@@ -1,15 +1,12 @@
-from datetime import datetime
-from django.shortcuts import render
+from django.views.generic import ListView
+from . import models
 
 
-def all_rooms(request):
-    now = datetime.now()
-    hungry = True
-    return render(
-        request,
-        "all_rooms.html",
-        context={
-            "now": now,
-            "hungry": hungry,
-        },
-    )
+class HomeView(ListView):
+
+    """ HomeView Definiton """
+
+    model = models.Room
+    paginate_by = 10
+    paginate_orphans = 5
+    ordering = "created"
