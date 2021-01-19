@@ -19,7 +19,6 @@ class LoginForm(forms.Form):
             self.add_error("email", forms.ValidationError("User does not exit"))
 
 class SignUpForm(forms.ModelForm):
-
     class Meta:
         model = models.User
         fields = ("first_name", "last_name", "email")
@@ -38,7 +37,7 @@ class SignUpForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
         user.username = email
         user.set_password(password)
         user.save()
